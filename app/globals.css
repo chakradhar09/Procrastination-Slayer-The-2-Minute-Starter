@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Manrope:wght@300;400;600;700&display=swap');
+
+:root {
+  /* Light Mode Defaults */
+  --bg-color: #f8f9fc;
+  --surface-color: rgba(255, 255, 255, 0.7);
+  --surface-highlight: rgba(255, 255, 255, 0.9);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --text-color: #1a1f36;
+  --text-muted: #4e5d78;
+  --brand-primary: #00b4d8;
+  --brand-secondary: #5e60ce;
+  --glow-shadow: 0 4px 20px rgba(0, 180, 216, 0.25);
+
+  /* Background pattern for light mode */
+  --bg-image:
+    radial-gradient(circle at 10% 10%, rgba(94, 96, 206, 0.05), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(0, 180, 216, 0.05), transparent 40%);
+}
+
+.dark {
+  /* Dark Mode Defaults */
+  --bg-color: #050816;
+  --surface-color: rgba(255, 255, 255, 0.03);
+  --surface-highlight: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-color: #e9ecf5;
+  --text-muted: #94a3b8;
+  --brand-primary: #64d8c1;
+  --brand-secondary: #7a7cff;
+  --glow-shadow: 0 0 20px rgba(100, 216, 193, 0.5);
+
+  /* Background pattern for dark mode */
+  --bg-image:
+    radial-gradient(circle at 15% 50%, rgba(122, 124, 255, 0.15), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(100, 216, 193, 0.15), transparent 25%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', system-ui, sans-serif;
+  background-color: var(--bg-color);
+  background-image: var(--bg-image);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Premium Glass Effect */
+.glass {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.glass-card {
+  @apply glass rounded-3xl transition-all duration-300;
+}
+
+.glass-card:hover {
+  background: var(--surface-highlight);
+  border-color: var(--border-color);
+  box-shadow: var(--glow-shadow);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  color: var(--text-color);
+}
+
+/* Buttons */
+.btn-primary {
+  @apply rounded-full font-semibold px-6 py-3 text-sm transition-all duration-300 shadow-glow relative overflow-hidden whitespace-nowrap;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+  color: #ffffff;
+  /* Be specific for button text on gradient */
+  border: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  @apply rounded-full font-semibold px-6 py-3 text-sm transition-all duration-300 border border-border hover:border-text-muted whitespace-nowrap;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover {
+  background: var(--surface-highlight);
+  color: var(--text-color);
+}
+
+.btn-icon-only {
+  @apply p-2 rounded-full transition-colors duration-200 text-text-muted hover:text-text hover:bg-surface-highlight;
+}
+
+/* Inputs */
+input,
+textarea {
+  @apply w-full bg-surface border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-all duration-300;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms;
+}

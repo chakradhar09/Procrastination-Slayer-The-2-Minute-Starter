@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procrastination Slayer • 2-Minute Starter</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Procrastination Slayer</p>
+        <h1>Start tiny. Win anyway.</h1>
+        <p class="lede">Turn any scary task into a 2-minute starter, launch a sprint, and stack streaks. Guardrails keep the plan focused on next steps only.</p>
+        <div class="hero-actions">
+          <button class="pill primary" id="quickStarterBtn">Generate Starter</button>
+          <button class="pill ghost" id="badDayBtn" aria-pressed="false">Bad day mode</button>
+        </div>
+        <div class="meta-row">
+          <span class="meta-chip">Rule-based + guarded AI</span>
+          <span class="meta-chip">Offline friendly</span>
+          <span class="meta-chip">Local streaks</span>
+        </div>
+      </div>
+      <div class="hero-card glass">
+        <p class="hero-label">Tiny victory loading...</p>
+        <div class="timer-stack">
+          <div>
+            <p class="timer-label">Starter (2 min)</p>
+            <p class="timer-value" id="starterTimer">02:00</p>
+          </div>
+          <div>
+            <p class="timer-label">Sprint (10/25 min)</p>
+            <p class="timer-value" id="sprintTimer">10:00</p>
+          </div>
+        </div>
+        <div class="hero-cta-row">
+          <button class="pill primary" id="startHero">Start</button>
+          <button class="pill subtle" id="resetHero">Reset</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel glass">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">1. Describe your task</p>
+            <h2>Make it real, then make it tiny</h2>
+          </div>
+          <div class="pill-group">
+            <button class="pill subtle" data-sprint="10">10 min sprint</button>
+            <button class="pill subtle" data-sprint="25">25 min sprint</button>
+            <button class="pill subtle" id="toggleNotifications">Enable reminders</button>
+          </div>
+        </div>
+        <textarea id="taskInput" rows="3" placeholder="Example: Study OS scheduling and ace that quiz"></textarea>
+        <div class="actions-row">
+          <button class="pill primary" id="generateBtn">Generate 2-minute starter</button>
+          <button class="pill ghost" id="ruleOnlyBtn">Rule-based only</button>
+          <label class="checkbox">
+            <input type="checkbox" id="safeMode" checked />
+            <span>Guardrails on (blocks off-topic prompts)</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="grid two">
+        <div class="panel glass" id="planPanel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">2. Starter + plan</p>
+              <h2>Ridiculously small first step</h2>
+            </div>
+            <div class="pill-group">
+              <span class="pill tiny" id="modeTag">Normal mode</span>
+              <span class="pill tiny" id="levelTag">Lvl 1</span>
+              <span class="pill tiny" id="streakTag">🔥 0-day streak</span>
+            </div>
+          </div>
+          <div class="plan">
+            <div class="plan-step" id="starterStep">
+              <p class="step-label">Starter (≤2 min)</p>
+              <p class="step-text muted">Add a task to generate a starter.</p>
+            </div>
+            <div class="plan-step" id="step1">
+              <p class="step-label">Step 1</p>
+              <p class="step-text muted">Sprint step will appear here.</p>
+            </div>
+            <div class="plan-step" id="step2">
+              <p class="step-label">Step 2</p>
+              <p class="step-text muted">Keep it small and doable.</p>
+            </div>
+            <div class="plan-step" id="step3">
+              <p class="step-label">Step 3</p>
+              <p class="step-text muted">Momentum over perfection.</p>
+            </div>
+          </div>
+          <div class="actions-row">
+            <button class="pill primary" id="startBtn">Start starter timer</button>
+            <button class="pill subtle" id="completeBtn">Mark done + streak</button>
+            <button class="pill ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+        <div class="panel glass focus">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">3. Focus timer</p>
+              <h2>Protect the tiny window</h2>
+            </div>
+            <div class="pill-group">
+              <span class="pill tiny" id="timerState">Idle</span>
+            </div>
+          </div>
+          <div class="timer-display">
+            <div>
+              <p class="timer-label">Current timer</p>
+              <p class="timer-value" id="timerDisplay">02:00</p>
+              <p class="timer-sub" id="timerSub">Starter phase</p>
+            </div>
+          </div>
+          <div class="actions-row">
+            <button class="pill primary" id="playBtn">Start</button>
+            <button class="pill subtle" id="pauseBtn">Pause</button>
+            <button class="pill ghost" id="skipBtn">Skip to sprint</button>
+          </div>
+          <div class="progress-row">
+            <div class="progress">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="ticks" id="tickMarks"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid two">
+        <div class="panel glass">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Distraction lot</p>
+              <h2>Park it, then return</h2>
+            </div>
+            <button class="pill subtle" id="clearDistractions">Clear</button>
+          </div>
+          <div class="distraction-input">
+            <input id="distractionInput" type="text" placeholder="Idea, itch, or distraction..." />
+            <button class="pill primary" id="addDistraction">Add</button>
+          </div>
+          <ul class="list" id="distractionList"></ul>
+        </div>
+
+        <div class="panel glass">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Gamification</p>
+              <h2>Cheap dopamine, earned cleanly</h2>
+            </div>
+            <button class="pill subtle" id="badgesHint">How to earn</button>
+          </div>
+          <div class="badges" id="badgeRack">
+            <div class="badge locked">
+              <p class="badge-title">Warm-up</p>
+              <p class="badge-desc">Complete 1 starter</p>
+            </div>
+            <div class="badge locked">
+              <p class="badge-title">Streaky</p>
+              <p class="badge-desc">3-day streak</p>
+            </div>
+            <div class="badge locked">
+              <p class="badge-title">Deep Diver</p>
+              <p class="badge-desc">Finish a 25 min sprint</p>
+            </div>
+            <div class="badge locked">
+              <p class="badge-title">Unflappable</p>
+              <p class="badge-desc">Use Bad Day mode</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel glass">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">History</p>
+            <h2>Your showing-up log</h2>
+          </div>
+          <button class="pill subtle" id="clearHistory">Reset history</button>
+        </div>
+        <ul class="history" id="historyList">
+          <li class="muted">No sessions yet. Start tiny!</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
